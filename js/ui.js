@@ -83,13 +83,20 @@ FA.UI = (function () {
     const prevData = FA.Store.listMonths().includes(prevMonth) ? FA.Store.getMonth(prevMonth) : null;
     const prevComputed = prevData ? FA.Analytics.computeMonth(prevData) : null;
 
+    const dialPct = Math.max(0, Math.min(100, Math.round((computed.savingsRate || 0) * 100)));
+
     const el = $("#view-overview");
     el.innerHTML = `
+      <div class="overview-header">
+        <div class="eyebrow">Extrato mensal</div>
+        <h1 class="overview-title">${FA.monthLabel(month)}</h1>
+      </div>
       <div class="grid grid-kpis">
-        <div class="card stat-tile">
+        <div class="card stat-tile hero-tile" style="--dial-pct:${dialPct}%">
           <div class="label">Saldo do mês</div>
           <div class="value">${FA.formatCurrency(computed.net)}</div>
           ${deltaHtml(computed.net, prevComputed ? prevComputed.net : null, true)}
+          <div class="sub">${computed.income > 0 ? dialPct + "% da renda preservada" : "Sem renda lançada neste mês"}</div>
         </div>
         <div class="card stat-tile">
           <div class="label">Receitas</div>
