@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minhas Finanças — Assistente Financeiro</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💰</text></svg>">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="app">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">💰 <div>Minhas Finanças<br><small>Assistente financeiro mensal</small></div></div>
+    <nav class="nav">
+      <button class="nav-item" data-view="overview">📊&nbsp; Visão geral</button>
+      <button class="nav-item" data-view="transactions">📄&nbsp; Lançamentos</button>
+      <button class="nav-item" data-view="card">💳&nbsp; Cartão</button>
+      <button class="nav-item" data-view="categories">🏷️&nbsp; Categorias</button>
+      <button class="nav-item" data-view="budget">🎯&nbsp; Orçamento</button>
+      <button class="nav-item" data-view="import">📥&nbsp; Importar</button>
+      <button class="nav-item" data-view="settings">⚙️&nbsp; Configurações</button>
+    </nav>
+    <div class="sidebar-footer">Tudo fica salvo só neste navegador (localStorage). Nenhum dado é enviado para fora.</div>
+  </aside>
+  <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+  <div class="main">
+    <header class="topbar">
+      <button class="icon-btn" id="menuToggle" aria-label="Abrir menu">☰</button>
+      <div class="month-switcher">
+        <button class="icon-btn" id="prevMonth" aria-label="Mês anterior">‹</button>
+        <select id="monthSelect" aria-label="Selecionar mês"></select>
+        <button class="icon-btn" id="nextMonth" aria-label="Próximo mês">›</button>
+        <button class="btn" id="newMonthBtn">+ novo mês</button>
+      </div>
+      <div class="topbar-actions">
+        <button class="btn" id="importNavBtn">📥 Importar arquivo</button>
+        <button class="btn btn-primary" id="addTxnBtn">+ Lançamento</button>
+      </div>
+    </header>
+
+    <main id="viewport">
+      <section id="view-overview" class="view"></section>
+      <section id="view-transactions" class="view" hidden></section>
+      <section id="view-card" class="view" hidden></section>
+      <section id="view-categories" class="view" hidden></section>
+      <section id="view-budget" class="view" hidden></section>
+      <section id="view-import" class="view" hidden></section>
+      <section id="view-settings" class="view" hidden></section>
+    </main>
+  </div>
+</div>
+
+<div id="modalRoot"></div>
+<div class="toast-stack" id="toastStack"></div>
+
+<script>
+  window.FA_PDFJS_WORKER_SRC = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" onerror="console.warn('pdf.js indisponível (sem conexão) — importação de PDF ficará desabilitada; use CSV ou lançamento manual.')"></script>
+
+<script src="data/seed-2026-07.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/mcc-map.js"></script>
+<script src="js/rules.js"></script>
+<script src="js/store.js"></script>
+<script src="js/categorizer.js"></script>
+<script src="js/parsers.js"></script>
+<script src="js/analytics.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
