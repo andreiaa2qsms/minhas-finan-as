@@ -51,12 +51,12 @@ FA.UI = (function () {
   function buildInsights(computed, monthData, prevComputed) {
     const insights = [];
     if (computed.income > 0 && computed.expenses > computed.income) {
-      insights.push({ type: "critical", icon: "⚠️", text: `Você gastou ${FA.formatCurrency(computed.expenses - computed.income)} a mais do que recebeu neste mês.` });
+      insights.push({ type: "critical", text: `Você gastou ${FA.formatCurrency(computed.expenses - computed.income)} a mais do que recebeu neste mês.` });
     } else if (computed.income > 0) {
-      insights.push({ type: "good", icon: "✅", text: `Você guardou ${(computed.savingsRate * 100).toFixed(0)}% da sua renda neste mês (${FA.formatCurrency(computed.net)}).` });
+      insights.push({ type: "good", text: `Você guardou ${(computed.savingsRate * 100).toFixed(0)}% da sua renda neste mês (${FA.formatCurrency(computed.net)}).` });
     }
     if (computed.topCategory && computed.topCategory.pct >= 28) {
-      insights.push({ type: "warning", icon: "🔎", text: `${computed.topCategory.label} concentra ${computed.topCategory.pct.toFixed(0)}% das suas despesas (${FA.formatCurrency(computed.topCategory.value)}).` });
+      insights.push({ type: "warning", text: `${computed.topCategory.label} concentra ${computed.topCategory.pct.toFixed(0)}% das suas despesas (${FA.formatCurrency(computed.topCategory.value)}).` });
     }
     if (prevComputed && prevComputed.expenses > 0) {
       const diff = computed.expenses - prevComputed.expenses;
@@ -64,15 +64,14 @@ FA.UI = (function () {
       if (Math.abs(pct) >= 12) {
         insights.push({
           type: pct > 0 ? "warning" : "good",
-          icon: pct > 0 ? "📈" : "📉",
           text: `Despesas ${pct > 0 ? "subiram" : "caíram"} ${Math.abs(pct).toFixed(0)}% em relação a ${FA.monthLabel(prevComputed.month)}.`
         });
       }
     }
     if (monthData.cardMeta && monthData.cardMeta.dueDate) {
-      insights.push({ type: "warning", icon: "💳", text: `Fatura do cartão final ${monthData.cardMeta.cardLast4 || "—"}: ${FA.formatCurrency(computed.cardTotal)}, vence em ${FA.formatDateBR(monthData.cardMeta.dueDate)}.` });
+      insights.push({ type: "warning", text: `Fatura do cartão final ${monthData.cardMeta.cardLast4 || "—"}: ${FA.formatCurrency(computed.cardTotal)}, vence em ${FA.formatDateBR(monthData.cardMeta.dueDate)}.` });
     }
-    if (!insights.length) insights.push({ type: "good", icon: "👋", text: "Sem lançamentos suficientes ainda para gerar recomendações — importe um extrato ou adicione lançamentos." });
+    if (!insights.length) insights.push({ type: "info", text: "Sem lançamentos suficientes ainda para gerar recomendações — importe um extrato ou adicione lançamentos." });
     return insights;
   }
 
@@ -123,7 +122,7 @@ FA.UI = (function () {
           <h2 class="section-title">Assistente</h2>
           <p class="section-sub">Observações automáticas sobre ${FA.monthLabel(month).toLowerCase()}.</p>
           <div class="insight-list">
-            ${buildInsights(computed, monthData, prevComputed).map(i => `<div class="insight ${i.type}"><span class="icon">${i.icon}</span><span>${i.text}</span></div>`).join("")}
+            ${buildInsights(computed, monthData, prevComputed).map(i => `<div class="insight ${i.type}"><span class="icon" aria-hidden="true"></span><span>${i.text}</span></div>`).join("")}
           </div>
         </div>
       </div>
@@ -234,7 +233,7 @@ FA.UI = (function () {
         <td><span class="pill editable" data-id="${t.id}"><span class="dot" style="background:${color}"></span>${FA.escapeHtml(t.subcategory || FA.categoryLabel(t.category))}</span></td>
         <td><span class="tag-source">${sourceLabel(t.source)}</span></td>
         <td class="num ${isIn ? "amount-in" : "amount-out"}">${isIn ? "+" : "−"} ${FA.formatCurrency(Math.abs(t.amount))}</td>
-        <td><button class="btn btn-ghost small" data-del="${t.id}" title="Excluir">🗑</button></td>
+        <td><button class="btn btn-ghost small icon-only" data-del="${t.id}" title="Excluir"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M9 7V4h6v3"/><path d="M6 7l1 13h10l1-13"/><path d="M10 11v6M14 11v6"/></svg></button></td>
       </tr>`;
     }
 
@@ -500,7 +499,7 @@ FA.UI = (function () {
     const box = $("#importResult");
     if (!box) return;
     if (!result.rows.length) {
-      box.innerHTML = `<div class="insight critical" style="margin-top:16px"><span class="icon">⚠️</span><span>${result.warnings[0] || "Nenhum lançamento reconhecido neste arquivo."}</span></div>`;
+      box.innerHTML = `<div class="insight critical" style="margin-top:16px"><span class="icon" aria-hidden="true"></span><span>${result.warnings[0] || "Nenhum lançamento reconhecido neste arquivo."}</span></div>`;
       return;
     }
     const months = {};
@@ -516,7 +515,7 @@ FA.UI = (function () {
             <select id="importTargetMonth">${Object.keys(months).sort().map(m => `<option value="${m}" ${m === targetMonth ? "selected" : ""}>${FA.monthLabel(m)}</option>`).join("")}</select>
           </div>
         </div>
-        ${result.warnings.length ? `<div class="import-warnings">${result.warnings.slice(0, 5).map(w => "⚠ " + FA.escapeHtml(w)).join("<br>")}</div>` : ""}
+        ${result.warnings.length ? `<div class="import-warnings">${result.warnings.slice(0, 5).map(w => "— " + FA.escapeHtml(w)).join("<br>")}</div>` : ""}
         <div class="table-scroll">
           <table class="fa-table">
             <thead><tr><th>Data</th><th>Descrição</th><th class="num">Valor</th></tr></thead>
