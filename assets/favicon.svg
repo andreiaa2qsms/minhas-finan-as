@@ -1,12 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Minhas Finanças">
-  <defs>
-    <linearGradient id="mfgFav" x1="20" y1="20" x2="480" y2="480" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#f4c65a"/>
-      <stop offset="45%" stop-color="#7ec488"/>
-      <stop offset="100%" stop-color="#0f9b8a"/>
-    </linearGradient>
-  </defs>
   <rect width="512" height="512" rx="112" fill="#12141b"/>
-  <circle cx="256" cy="256" r="176" fill="none" stroke="url(#mfgFav)" stroke-width="30"/>
-  <text x="256" y="312" font-family="'Space Grotesk','Arial',sans-serif" font-size="216" font-weight="700" text-anchor="middle" fill="url(#mfgFav)">$</text>
+  <g transform="translate(256,246) scale(1.5) translate(-243,-148)">
+    <path d="M176,122 Q168,82 205,70 C252,54 302,90 334,156 C282,130 225,114 176,122 Z" fill="#0e8b90"/>
+    <path d="M172,148 C222,152 280,154 334,156 C304,216 238,242 186,226 Q152,212 172,148 Z" fill="#053f40"/>
+  </g>
 </svg>

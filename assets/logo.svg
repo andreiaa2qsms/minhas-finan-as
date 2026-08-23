@@ -1,19 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Minhas Finanças">
-  <defs>
-    <linearGradient id="mfg" x1="20" y1="20" x2="480" y2="470" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#f4c65a"/>
-      <stop offset="45%" stop-color="#7ec488"/>
-      <stop offset="100%" stop-color="#0f9b8a"/>
-    </linearGradient>
-  </defs>
-  <g fill="none" stroke="url(#mfg)" stroke-width="22" stroke-linecap="round" stroke-linejoin="round">
-    <rect x="66" y="330" width="228" height="50" rx="25"/>
-    <rect x="84" y="282" width="228" height="50" rx="25"/>
-    <rect x="102" y="234" width="228" height="50" rx="25"/>
-    <circle cx="336" cy="256" r="118"/>
-    <circle cx="336" cy="256" r="84"/>
-    <path d="M410 372 Q 440 392 460 366"/>
+  <g transform="translate(256,256) scale(1.8) translate(-243,-148)">
+    <path d="M176,122 Q168,82 205,70 C252,54 302,90 334,156 C282,130 225,114 176,122 Z" fill="#0e8b90"/>
+    <path d="M172,148 C222,152 280,154 334,156 C304,216 238,242 186,226 Q152,212 172,148 Z" fill="#053f40"/>
   </g>
-  <circle cx="443" cy="348" r="11" fill="url(#mfg)"/>
-  <text x="336" y="300" font-family="'Space Grotesk','Arial',sans-serif" font-size="132" font-weight="700" text-anchor="middle" fill="url(#mfg)">$</text>
 </svg>
